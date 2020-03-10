@@ -1,12 +1,15 @@
+#!/usr/bin/env ruby
 require_relative 'imagebackup/version'
 
 require 'exiv2'
+
 file_types = [
   '**/*.CR2',
   '**/*.DNG',
   '**/*.MOV',
   '**/*.MP4'
 ]
+
 Dir.glob(file_types).each do |f|
   puts "#{Dir.pwd}/#{f}"
   file = "#{Dir.pwd}/#{f}"
@@ -16,9 +19,6 @@ Dir.glob(file_types).each do |f|
   #   puts "#{k} = #{v}\n"
   # end
   # p date = image.exif_data.member?("Exif.Image.DateTime")
-  p date = image.exif_data.find do |v|
-    # puts k.to_str
-    # puts v.to_str
-  end
+  p date = image.exif_data.find { |v| v[0] == 'Exif.Image.DateTime' }
   gets
 end
