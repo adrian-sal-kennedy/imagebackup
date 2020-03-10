@@ -7,13 +7,18 @@
 
 ## Dependencies:
 
-- **Ruby**, plus gems:
+**Ruby** v2.3.0 or greater, plus gems:
   - exiv2
-  - ffprober
-- Ruby modules:
-  - fileutils.rb
-  - json
+  - ffprober  
 
+Ruby modules:
+  - fileutils.rb
+  - json  
+
+Bundler should handle all these dependencies. If for some reason it doesn't you can run this in terminal:  
+```bash
+$ gem install exiv2 ffprober
+```
 
 ## Usage:
 
