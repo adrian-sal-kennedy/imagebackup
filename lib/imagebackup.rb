@@ -2,6 +2,24 @@
 require_relative 'imagebackup/version'
 
 require 'exiv2'
+require 'fileutils'
+require 'ffprober'
+require 'json'
+
+def get_dates(file)
+  begin
+    image = Exiv2::ImageFactory.open(file)
+    image.read_metadata
+    date = image.exif_data.find { |v| v[0] == 'Exif.Image.DateTime' }
+    date = date[1].split[0].gsub(':','-')
+  rescue => exiv2_no_exifdata
+    probe = Ffprober::Parser.from_file(file)
+    date = probe.format.tags[:creation_time].split('T')[0]
+  end
+  return date
+end
+
+dest = ARGV[0]
 
 file_types = [
   '**/*.CR2',
@@ -11,21 +29,20 @@ file_types = [
   '**/*.JPG'
 ]
 
-dest = ARGV[0]
+Dir.glob(file_types).reverse_each do |f|
 
-Dir.glob(file_types).each do |f|
-  # puts "#{Dir.pwd}/#{f}"
   file = "#{Dir.pwd}/#{f}"
-  image = Exiv2::ImageFactory.open(file)
-  image.read_metadata
   
-  date = image.exif_data.find { |v| v[0] == 'Exif.Image.DateTime' }
-  destpath = "#{dest}/#{date[1].split[0].gsub(':','-')}"
+  date = get_dates(file)
+  destpath = "#{dest}/#{date}"
   destpath = destpath.gsub('//','/')
-  if Dir.exist?(destpath)
-    p outfile =  "#{destpath}/#{File.basename(file)}"
+  outfile =  "#{destpath}/#{File.basename(file)}"
+  if File.exist?(outfile)
+    puts "\"#{outfile}\" already exists."
   else
-    puts "nope, \"#{destpath}\" doesn't exist."
+    puts "copying \"#{file}\" to \"#{outfile}\""
+    FileUtils.mkdir_p(destpath)
+    FileUtils.cp(file,outfile)
   end
-  sleep 1
+  # sleep 0.1
 end

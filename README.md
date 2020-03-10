@@ -9,9 +9,10 @@
 
 - **Ruby**, plus gems:
   - exiv2
-  - ffmpeg-video-info
+  - ffprober
 - Ruby modules:
   - fileutils.rb
+  - json
 
 
 ## Usage:

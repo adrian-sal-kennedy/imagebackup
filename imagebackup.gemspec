@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'exiv2'
-  spec.add_dependency 'ffmpeg-video-info'
+  spec.add_dependency 'ffprober'
 end
