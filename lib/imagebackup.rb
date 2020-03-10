@@ -6,6 +6,10 @@ require 'fileutils'
 require 'ffprober'
 require 'json'
 
+def file_types_list
+  puts "TODO: a method to create an ugly Dir.glob string from a readable list of file types that can be pushed from CLI"
+end
+
 def get_dates(file)
   begin
     image = Exiv2::ImageFactory.open(file)
