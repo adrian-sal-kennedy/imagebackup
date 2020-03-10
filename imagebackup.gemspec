@@ -27,5 +27,5 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'exiv2' 'ffmpeg-video-info'
+  spec.add_dependency 'exiv2', 'ffmpeg-video-info'
 end
