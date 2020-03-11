@@ -1,56 +1,62 @@
 #!/usr/bin/env ruby
 require_relative 'imagebackup/version'
 
-# require_relative ''
+require_relative 'classes/filetypes'
+require_relative 'methods/build_paths'
+require_relative 'methods/get_dates'
+require_relative 'methods/copy_pic'
 
 require 'exiv2'
 require 'fileutils'
 require 'ffprober'
 require 'json'
+require 'getoptlong'
 
-def file_types_list
-  return [
-    '**/*.CR2',
-    '**/*.DNG',
-    '**/*.MOV',
-    '**/*.MP4',
-    '**/*.JPG'
-  ]
-end
-
-def get_dates(file)
-  begin
-    image = Exiv2::ImageFactory.open(file)
-    image.read_metadata
-    date = image.exif_data.find { |v| v[0] == 'Exif.Image.DateTime' }
-    date = date[1].split[0].gsub(':','-')
-  rescue => exiv2_no_exifdata
-    probe = Ffprober::Parser.from_file(file)
-    date = probe.format.tags[:creation_time].split('T')[0]
-  end
-  return date
-end
-
-# dest = ARGV[0]
-
-def main_loop(dest)
-  file_types = file_types_list()
+def main_loop(dest,dryrun=true)
+  file_types = FileTypes.list
   Dir.glob(file_types).reverse_each do |f|
 
     file = "#{Dir.pwd}/#{f}"
 
-    date = get_dates(file)
-    destpath = "#{dest}/#{date}"
-    destpath = destpath.gsub('//','/')
-    outfile =  "#{destpath}/#{File.basename(file)}"
+    parms = build_paths(dest,file,get_dates(file))
+    outfile = parms[0]
+    destpath = parms[1]
+
     if File.exist?(outfile)
       puts "\"#{outfile}\" already exists."
     else
-      puts "copying \"#{file}\" to \"#{outfile}\""
-      puts "FileUtils.mkdir_p(#{destpath})"
-      puts "FileUtils.cp(#{file},#{outfile})"
+      copy_pic(file,outfile,destpath,dryrun)
     end
   end
 end
 
-main_loop(ARGV[0])
+# main_loop(ARGV[0])
+
+dryrun = true
+
+if (ARGV & ['-n','--dry-run']).any?
+  dryrun = true
+  ARGV.delete('-n')
+  ARGV.delete('--dry-run')
+else
+  # FIXME: THIS IS REVERSED TO ALWAYS BE TRUE WHILE I'M TESTING. CHANGE BELOW TO false BEFORE DEPLOYMENT
+  dryrun = true
+  puts "dry run is disabled! i'm really going to mess with your files!"
+end
+if ARGV.include?('-a')#,'--add-filetype']).any?
+  ext=ARGV[ARGV.index('-a')+1]
+  type=ARGV[ARGV.index('-a')+2]
+  ARGV.slice!(ARGV.index('-a')..ARGV.index('-a')+2)
+end
+if ARGV.include?('--add-filetype')
+  ext=ARGV[ARGV.index('--add-filetype')+1]
+  type=ARGV[ARGV.index('--add-filetype')+2]
+  ARGV.slice!(ARGV.index('--add-filetype')..ARGV.index('--add-filetype')+2)
+end
+if ext
+  FileTypes.add(ext,type)
+end
+
+if ARGV
+  main_loop(ARGV[0])
+end
