@@ -3,9 +3,13 @@ mp4,movie
 avi,movie
 mpg,movie
 vob,movie
+m2ts,movie
 3gp,movie
 mxf,movie
 mlv,movie
+webm,movie
+mkv,movie
+ogm,movie
 dng,pic
 tif,pic
 jpg,pic
@@ -14,6 +18,4 @@ crw,pic
 cr2,pic
 arw,pic
 raw,pic
-gif,pic
-gif,pic
 gif,pic
