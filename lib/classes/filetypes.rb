@@ -1,4 +1,3 @@
-require 'csv'
 
 # FileTypes is a very simple file class to store and retrieve the list of files
 # we are interested in backing up.

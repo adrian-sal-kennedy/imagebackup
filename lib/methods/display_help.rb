@@ -1,4 +1,4 @@
-def display_help
+def display_help(err=nil,color=nil)
   print <<~HELPFILE
     ===== ImageBackup =====
 
@@ -77,6 +77,6 @@ def display_help
     $ gem install exiv2 ffprober
 
   HELPFILE
-
+  puts err.to_s.colorize(color)
   exit(0)
 end

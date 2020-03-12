@@ -72,13 +72,15 @@ This mode can be useful if you want to operate on the files in one place but kee
 ## Dependencies:
 
 **Ruby** v2.3.0 or greater, plus gems:
-  - exiv2
-  - ffprober  
+  - [exiv2](https://rubygems.org/gems/exiv2/versions/0.0.8) to retrieve EXIF date/time.
+  - [ffprober](https://github.com/beanieboi/ffprober) to retrieve video container date/time tags if present.
+  - [colorize](https://github.com/fazibear/colorize) to make output a little more readable and engaging.
 
 Ruby modules:
-  - fileutils.rb
+  - [fileutils](https://ruby-doc.org/stdlib-2.4.1/libdoc/fileutils/rdoc/FileUtils.html) to manage file operations (get attributes, copy, move, link).
+  - [csv](https://ruby-doc.org/stdlib-2.6.1/libdoc/csv/rdoc/CSV.html) to process the list of available file types.
 
 Bundler should handle all these dependencies. If for some reason it doesn't you can run this in terminal:  
 ```bash
-$ gem install exiv2 ffprober
+$ gem install exiv2 ffprober colorize
 ```
