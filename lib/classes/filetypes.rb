@@ -26,5 +26,7 @@ class FileTypes
     CSV.open("#{File.dirname(__FILE__)}/filetypes.csv","a") do |csv|
       p csv << [ext,type]
     end
+    puts "New file types registered."
+    exit
   end
 end

@@ -78,6 +78,11 @@ else
   if File.exist?(ARGV[0])
     main_loop(ARGV[0],dryrun,file_op)
   else
-    puts "Specified destination does not exist. Please create this folder first."
+    if ARGV[0][0] == '-'
+      puts "Invalid option!\n-----\n\n"
+      display_help()
+    else
+      puts "Specified destination does not exist. Please create this folder first."
+    end
   end
 end
