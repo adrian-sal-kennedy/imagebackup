@@ -10,7 +10,7 @@ def get_dates(file)
       date = probe.format.tags[:creation_time].split('T')[0]
     rescue StandardError
       fileobj = File.new(file)
-      date = "#{fileobj.stat.ctime.year}-#{fileobj.stat.ctime.month}-#{fileobj.stat.ctime.day}"
+      date = "#{"%04d" % fileobj.stat.ctime.year}-#{"%02d" % fileobj.stat.ctime.month}-#{"%02d" % fileobj.stat.ctime.day}"
     end
   end
   date

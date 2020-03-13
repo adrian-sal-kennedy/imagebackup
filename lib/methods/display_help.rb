@@ -22,8 +22,10 @@ def display_help(err=nil,color=nil)
                                              but ensure there's a blank line at the end or this program
                                              may behave badly.
 
-    -m                                       Will move (deleting the original), which is probably not a
+    -m, --move                               Will move (deleting the original), which is probably not a
                                              good idea in most cases but still useful at times.
+    -l, --link                               Create symbolic links instead of copying or moving
+                                             actual files. Useful for large videos.
 
     Usage:
 
