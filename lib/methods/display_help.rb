@@ -22,7 +22,7 @@ def display_help(err=nil,color=nil)
                                              but ensure there's a blank line at the end or this program
                                              may behave badly.
 
-    -m                                       will move (deleting the original), which is probably not a
+    -m                                       Will move (deleting the original), which is probably not a
                                              good idea in most cases but still useful at times.
 
     Usage:
@@ -63,19 +63,6 @@ def display_help(err=nil,color=nil)
     $ imagebackup.rb --link ~/Photos/raw
 
     This mode can be useful if you want to operate on the files in one place but keep them on their media. Particularly useful for large movie files.
-
-    Dependencies:
-
-    Ruby v2.3.0 or greater, plus gems:
-     - exiv2
-     - ffprober
-
-    Ruby modules:
-     - fileutils
-
-    Bundler should handle all these dependencies. If for some reason it doesn't you can run this in terminal:
-    $ gem install exiv2 ffprober
-
   HELPFILE
   puts err.to_s.colorize(color)
   exit(0)

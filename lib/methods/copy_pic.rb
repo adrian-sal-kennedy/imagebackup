@@ -4,11 +4,8 @@ def process_file(file, outfile, dryrun = nil, file_op = 'cp')
   else
     puts "#{file_op}-ing \"#{file} to #{outfile}\"..."
     FileUtils.public_send(file_op, file, outfile)
-    FileUtils.public_send(file_op, "#{file}.xmp", outfile, force: true)
-    if file_op == 'cp'
-      FileUtils.public_send(file_op, "#{file}.xmp", outfile)
-    else
-      FileUtils.public_send(file_op, "#{file}.xmp", outfile, force: true)
+    if File.exist?("#{file}.xmp")
+      FileUtils.public_send(file_op, "#{file}.xmp", "#{outfile}.xmp")
     end
   end
 end

@@ -5,6 +5,7 @@
 ### A simple terminal app to crawl a folder (usually a camera card's DCIM folder) for pictures and videos, and pop them in dated folders to your destination folder of choice. Uses exif data when available, creation_time, or the file's own creation date if nothing better is present.  
 ### Will also copy over any xmp sidecar files found, not overwriting.
 
+Source is available here: [https://github.com/adrian-sal-kennedy/imagebackup]()
 
 ## Options:
 -n, --dry-run  
