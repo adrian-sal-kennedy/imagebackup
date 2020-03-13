@@ -1,6 +1,6 @@
 def process_file(file, outfile, dryrun = nil, file_op = 'cp')
   if dryrun
-    puts "#{"pretending to ".colorize(:light_green)}#{file_op} \"#{file}#{" to ".colorize(:light_green)}#{outfile}\""
+    puts "#{"pretending to ".colorize(:light_green)}#{file_op} \"#{file}\"#{" to ".colorize(:light_green)}\"#{outfile}\""
   else
     puts "#{file_op}-ing \"#{file} to #{outfile}\"..."
     FileUtils.public_send(file_op, file, outfile)
