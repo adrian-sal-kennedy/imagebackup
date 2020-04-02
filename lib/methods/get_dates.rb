@@ -7,7 +7,7 @@ def get_dates(file)
   rescue StandardError
     begin
       probe = Ffprober::Parser.from_file(file)
-      date = probe.format.tags[:creation_time].split('T')[0]
+      date = probe.format.tags[:creation_time].split(/[T ]/)[0]
     rescue StandardError
       fileobj = File.new(file)
       date = "#{"%04d" % fileobj.stat.ctime.year}-#{"%02d" % fileobj.stat.ctime.month}-#{"%02d" % fileobj.stat.ctime.day}"
