@@ -70,6 +70,11 @@ $ imagebackup.rb --link ~/Photos/raw
 ```
 This mode can be useful if you want to operate on the files in one place but keep them on their media. Particularly useful for large movie files.
 
+## Demo video:
+
+[![screenshot of a terminal in ubuntu](https://i.vimeocdn.com/video/872585720_640.jpg)](https://vimeo.com/403201846)
+
+
 ## Dependencies:
 
 **Ruby** v2.3.0 or greater, plus gems:
